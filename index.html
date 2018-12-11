@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Inheritance in JavaScript</h1></section>
+				<section>
+					<p>__proto__ in consol</p>
+					<img src="jpg/slide_1.jpg" alt="__proto__">
+				</section>
+				<section>
+						<p>Object</p>
+						<img src="jpg/Object.png" alt="Object">
+						<aside class="notes">
+							Each object in JS is a set of pairs ‘key-value’. Each object has a ‘__proto__’ property that refers to another object. If we talk about a simple object, then ‘__proto__’ refers to the Object.prototype. 
+						</aside>
+				</section>
+			
+				<section>
+					  <p>Native prototype classes</p>
+						<img src="jpg/native-prototypes-classes.png" alt="Scheme">
+						<aside class="notes">
+							It can be seen, that all arrays have Array.prototype in which all array methods are stored and called when needed. The same works for the functions and numbers, which have Function.prototype and Number.prototype, respectively, with a set of methods. 
+						</aside>
+				</section>
+
+        <section>
+						<p>To create an object, which doesn't have a prototype:</p>
+						<pre><code data-trim data-noescape>
+						           	var obj = Object.create(null)
+							</code></pre> 
+							
+				</section>
+
+				<section>
+						<p>Function</p>
+						<img src="jpg/Function.png" alt="Function">
+						<aside class="notes">
+							A function is also a set of key-value pairs. Functions ‘__proto__’ refers to Function.prototype. The function has a property “prototype”, which refers to an “almost empty” object. In the object, there is a link ‘__proto__’, which refers to the Object.prototype, and a constructor property, which refers to the function itself. 
+						</aside>
+				</section>
+
+				<section>
+					<p>Create function 'User'</p>
+						<img src="jpg/slide_3.png" alt="#">
+						<aside class="notes">
+							Here, for example, how you can create a function with which you can easily produce similar objects with properties: ‘name’, ‘id’, ‘avatar’.
+						</aside>
+				</section>
+				<section>
+					<p>Add method 'deleteAvatar'</p>
+						<img src="jpg/slide_4.png" alt="#">
+						<aside class="notes">
+							For example, you need to add a method to remove the avatar. 
+						</aside>
+				</section>
+				<section>
+						<p>Add a 'deleteAvatar' method to the prototype</p>
+						<img src="jpg/slide_5.png" alt="#">
+						<aside class="notes">
+							For this，you can use the prototype properties. The slide shows that the ‘deleteAvatar’ method is not available for the new objects, but their prototype has this method. When calling the ‘deleteAvatar’ method of all new objects, formed from user, the interpreter will find the method in the prototype.
+						</aside>
+				</section>
+				<section>
+					<p>Create an 'Admin' object that inherits all properties from 'User'</p>
+						<img src="jpg/slide_6.png" alt="#">
+						<aside class="notes">
+							Also, prototype inheritance allows to create a child object for an already created object and inherit all properties from it. For example, create an Admin object that inherits all properties from ‘User’:
+						</aside>
+				</section>
+				<section>
+					  <p>Add a method to the new ‘Admin’ object</p>
+						<img src="jpg/slide_7.png" alt="#">
+						<aside class="notes">
+							Then to add a method to the new ‘Admin’ object, that ‘Admin’ will have, but ‘User’ will not.
+						</aside>
+				</section>
+				<section>
+					  <h3>ES6</h3>
+						<img src="jpg/slide_8.png" alt="#">
+						<aside class="notes">
+							In ES6  is more convenient to use prototype inheritance, the code has become more readable, short. If you look at a specific example, instead of a long record: ‘Admin.prototype equally Object.create (User.prototype)’ a shorter and more readable “Admin extends User” is used
+						</aside>
+				</section>
+
+				<section>
+					<p>instanceof</p>
+					<pre><code data-trim data-noescape class="javascript" >
+						function User() {}
+
+              //create object
+              var user = new User();
+
+              // check
+              console.log( user instanceof User ); //true
+						</code></pre> 
+						<aside class="notes">
+							In addition, it is important to mention the operator ‘instanceof’. It allows you to check which class the object belongs to given prototype inheritance. It works as follows: ‘obj instanceof Constructor’ returns ‘true’, if the object belongs to the class ‘Constructor’ or to a class that inherits from it.
+						</aside>
+			</section>
+				<section>
+						<h2>THAT IS ALL ! THANK YOU!!!</h2>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
